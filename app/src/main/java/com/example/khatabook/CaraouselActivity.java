@@ -64,7 +64,7 @@ public class CaraouselActivity extends AppCompatActivity {
         plutoView.setCustomIndicator(plutoIndicator);
 
         goToHomeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(CaraouselActivity.this, MainActivity.class);
+            Intent intent = new Intent(CaraouselActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         });
