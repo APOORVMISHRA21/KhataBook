@@ -15,7 +15,8 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(Looper.getMainLooper()).postDelayed((Runnable) () -> {
-            startActivity(new Intent(SplashActivity.this, CaraouselActivity.class));
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            finish();
         }, 3000);
     }
 }
