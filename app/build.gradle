@@ -41,4 +41,10 @@ dependencies {
     implementation 'com.opensooq.android:pluto:1.6'
 
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
+
+    // Dependency FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:6.2.1'
+
+    // Dependency for Firebase REaltime Database
+    implementation 'com.google.firebase:firebase-database:19.3.1'
 }
