@@ -6,6 +6,8 @@ public class Payroll {
     private int Salary;
     private String Department;
 
+    public Payroll(){}
+
     public String getDepartment() {
         return Department;
     }
