@@ -10,9 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KhataBook">
         <activity
+            android:name=".InventoryDetails"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".AddInventory"
+            android:exported="true" />
+        <activity
+            android:name=".Payroll"
+            android:exported="true" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"

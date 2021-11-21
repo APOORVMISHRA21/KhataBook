@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">KhataBook</string>
+    <string-array name="product_list">
+        <item>Aclomid P Tab</item>
+        <item>Aclomid SP Tab</item>
+        <item>VZ Lact Cap</item>
+        <item>Disprin Tab</item>
+        <item>Montina L Tab</item>
+        <item>Calcitrol M Tab</item>
+        <item>Midkast LC Tab</item>
+        <item>NT Para Tab</item>
+        <item>Azomid Tab</item>
+        <item>Bonty Plus Tab</item>
+    </string-array>
 </resources>
