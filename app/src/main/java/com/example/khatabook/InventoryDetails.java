@@ -1,5 +1,7 @@
 package com.example.khatabook;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +27,8 @@ public class InventoryDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private InventoryAdapter adapter;
+    private DatabaseReference databaseReference,fdb;
 
     private ArrayList<Inventory> productList;
 
@@ -40,6 +44,34 @@ public class InventoryDetails extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference("inventory");
 
         populateProductList();
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    populateProductList();
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -57,8 +89,8 @@ public class InventoryDetails extends AppCompatActivity {
                         productList.add(inventory);
                     }
                 }
-
-                recyclerView.setAdapter(new InventoryAdapter(productList, InventoryDetails.this));
+                adapter = new InventoryAdapter(productList,InventoryDetails.this);
+                recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(InventoryDetails.this));
             }
 
@@ -68,6 +100,7 @@ public class InventoryDetails extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
 
     }
 }

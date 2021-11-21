@@ -39,7 +39,7 @@ public class PayrollAdapter extends FirebaseRecyclerAdapter<Payroll,PayrollAdapt
         holder.noOfEmployees.setText(String.valueOf(model.getEmployees()));
         holder.totalDepartment.setText(String.valueOf(model.getEmployees() * model.getSalary()));
         totalPayment = totalPayment + model.getEmployees() * model.getSalary();
-        myref.setValue( String.valueOf(totalPayment));
+        myref.setValue(String.valueOf(totalPayment));
     }
 
     @NonNull
