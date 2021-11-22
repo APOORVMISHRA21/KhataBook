@@ -11,4 +11,5 @@
     <color name="splash_bg">#ccabde</color>
     <color name="purpleHeader">#805dfe</color>
     <color name="purpleBg">#9e83fe</color>
+    <color name="red">#f54842</color>
 </resources>

@@ -13,7 +13,6 @@ public class Inventory {
         this.quantity = quantity;
         this.cp = costPrice;
         this.sp = sellingPrice;
-
     }
 
     public Inventory(){}

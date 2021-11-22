@@ -34,14 +34,14 @@
         android:id="@+id/go_to_home_button"
         android:layout_width="110dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="14dp"
+        android:padding="4dp"
         app:cardBackgroundColor="#9e83fe"
         app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
-        android:padding="4dp">
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -54,9 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:fontFamily="@font/rubik_regular"
+                android:text="Next"
                 android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="Next"/>
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="wrap_content"

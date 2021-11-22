@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/circle_shape.xml" value="0.1" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/circular_progress_bar.xml" value="0.536" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_caraousel1.xml" value="0.15625" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_forward_arrow.xml" value="0.275" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_home.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_add_inventory.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_caraousel.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_inventory_details.xml" value="0.14375" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_invoice.xml" value="0.1" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_main.xml" value="0.14375" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_payroll.xml" value="0.2259963768115942" />
