@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private Toolbar mToolbar;
-    private TextView goToInventory;
+    private TextView goToInventory,goDataEntry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,13 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         goToInventory = findViewById(R.id.go_to_see_inventory);
+        goDataEntry = findViewById(R.id.go_to_data_entry);
 
         goToInventory.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, InventoryDetails.class));
+        });
+        goDataEntry.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, dataEntry.class));
         });
 
     }
@@ -64,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.settings:
+                Intent i = new Intent(MainActivity.this, PayrollActivity.class);
+                startActivity(i);
+                finish();
                 break;
 
             case R.id.logout:
