@@ -176,6 +176,7 @@ public class InvoiceActivity extends AppCompatActivity {
         });
 
         calculateAmountButton.setOnClickListener(view -> {
+
             Float discountedValue = inventorySelected.getSp() -
                     (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
             Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
@@ -189,16 +190,26 @@ public class InvoiceActivity extends AppCompatActivity {
         });
 
         submitButton.setOnClickListener(view -> {
-            progressLoadingView.setVisibility(View.VISIBLE);
 
-            new Handler(Looper.getMainLooper()).postDelayed((Runnable) () -> {
+            if(customerMail.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter customer mail",Toast.LENGTH_SHORT).show();
 
-                updateInventory(inventorySelected.getProductId(),
-                        inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
-                //generatePdf();
-                sendEmail();
-                addToFirebaseDb(customerName.getText().toString(),customerMail.getText().toString(),inventorySelected.getProduct_name(),noOfBoxes.getText().toString(),discount.getText().toString(),totalInvoiceAmount);
-            }, 2000);
+            }
+            else
+            {
+                progressLoadingView.setVisibility(View.VISIBLE);
+
+                new Handler(Looper.getMainLooper()).postDelayed((Runnable) () -> {
+
+                    updateInventory(inventorySelected.getProductId(),
+                            inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
+                    //generatePdf();
+                    sendEmail();
+                    addToFirebaseDb(customerName.getText().toString(),customerMail.getText().toString(),inventorySelected.getProduct_name(),noOfBoxes.getText().toString(),discount.getText().toString(),totalInvoiceAmount);
+                }, 2000);
+            }
+
 
 
 
@@ -364,7 +375,7 @@ public class InvoiceActivity extends AppCompatActivity {
         taskMap.put("invoiceQuantity",quantity);
         taskMap.put("invoiceDiscount",discount);
         taskMap.put("invoiceTotalAmount",totalAmount);
-        FirebaseDatabase.getInstance().getReference("invoice").child(formatedDate).child(formattedTime).updateChildren(taskMap);
+        FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).updateChildren(taskMap);
 
 
     }
