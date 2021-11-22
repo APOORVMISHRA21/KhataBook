@@ -199,9 +199,6 @@
 
             </RelativeLayout>
 
-
-
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/submit_button"
                 android:layout_width="match_parent"

@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
@@ -27,17 +28,18 @@ import Models.Payroll;
 public class PayrollActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    PayrollAdapter adapter;
-    DatabaseReference mbase,mbase2;
+    private PayrollAdapter adapter;
+    private DatabaseReference mbase,mbase2;
     private Toolbar toolbar;
-    TextView paymentMessage;
-    ProgressBar progressBar;
-
+    private TextView paymentMessage;
+    private ProgressBar progressBar;
+    private ImageView goHomeButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payroll);
         //getSupportActionBar().setTitle("PayRoll");
+
         paymentMessage = findViewById(R.id.finslMsg);
 
         ProgressDialog dialog = new ProgressDialog(this);
@@ -48,7 +50,10 @@ public class PayrollActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
-
+        goHomeButton = findViewById(R.id.go_to_home_button);
+        goHomeButton.setOnClickListener(view -> {
+            finish();
+        });
 
         mbase = FirebaseDatabase.getInstance().getReference().child("payroll");
         mbase2 = FirebaseDatabase.getInstance().getReference().child("payRollAmount");

@@ -1,12 +1,18 @@
 package com.example.khatabook;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,9 +30,11 @@ public class InventoryDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
-
+    private InventoryAdapter adapter;
+    private DatabaseReference databaseReference,fdb;
+    private ImageView goHomeButton;
     private ArrayList<Inventory> productList;
+    private RelativeLayout progressLoadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +43,43 @@ public class InventoryDetails extends AppCompatActivity {
 
         productList = new ArrayList<>();
         recyclerView = findViewById(R.id.inventory_recycler);
+        progressLoadingView = findViewById(R.id.loadingPanel);
+        goHomeButton = findViewById(R.id.go_to_home_button);
+        goHomeButton.setOnClickListener(view -> {
+            finish();
+        });
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("inventory");
 
         populateProductList();
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    populateProductList();
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void populateProductList(){
@@ -57,9 +96,10 @@ public class InventoryDetails extends AppCompatActivity {
                         productList.add(inventory);
                     }
                 }
-
-                recyclerView.setAdapter(new InventoryAdapter(productList, InventoryDetails.this));
+                adapter = new InventoryAdapter(productList,InventoryDetails.this);
+                recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(InventoryDetails.this));
+                progressLoadingView.setVisibility(View.GONE);
             }
 
             @Override
@@ -68,6 +108,7 @@ public class InventoryDetails extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
 
     }
 }

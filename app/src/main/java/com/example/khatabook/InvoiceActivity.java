@@ -6,16 +6,24 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,7 +39,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,16 +54,19 @@ import Models.Inventory;
 public class InvoiceActivity extends AppCompatActivity {
 
     private final String TAG = "InvoiceActivity";
-    ArrayList<String> productNameList;
-    ArrayList<Inventory> productList;
-    DatabaseReference databaseReference;
-    TextView totalAmount;
-    TextInputEditText noOfBoxes, discount, customerMail, customerName;
-    TextInputLayout noOfBoxesLayout, discountLayout, customerMailLayout;
-    Inventory inventorySelected;
-    CardView calculateAmountButton, submitButton;
-    ProgressBar progressBar;
-    RelativeLayout progressLoadingView;
+    private final String YOUR_FOLDER_NAME = "Khatabook";
+    private ArrayList<String> productNameList;
+    private ArrayList<Inventory> productList;
+    private DatabaseReference databaseReference;
+    private TextView totalAmount;
+    private TextInputEditText noOfBoxes, discount, customerMail, customerName;
+    private TextInputLayout noOfBoxesLayout, discountLayout, customerMailLayout;
+    private Inventory inventorySelected;
+    private CardView calculateAmountButton, submitButton;
+    private ProgressBar progressBar;
+    private RelativeLayout progressLoadingView;
+    private ImageView goHomeButton;
+
 
     private int numberOfBoxesInStock;
 
@@ -143,6 +159,11 @@ public class InvoiceActivity extends AppCompatActivity {
         productList = new ArrayList<>();
         populateProductList();
 
+        goHomeButton = findViewById(R.id.go_to_home_button);
+        goHomeButton.setOnClickListener(view -> {
+            finish();
+        });
+
         calculateAmountButton.setOnClickListener(view -> {
             Float discountedValue = inventorySelected.getSp() -
                     (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
@@ -162,7 +183,7 @@ public class InvoiceActivity extends AppCompatActivity {
 
                 updateInventory(inventorySelected.getProductId(),
                         inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
-
+                //generatePdf();
                 sendEmail();
             }, 2000);
 
@@ -310,5 +331,119 @@ public class InvoiceActivity extends AppCompatActivity {
                 inventorySelected.getSp());
 
         myRef.child(productId).setValue(inventory);
+    }
+
+    private void generatePdf(){
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        RelativeLayout invoiceView = (RelativeLayout) inflater.inflate(R.layout.sample_invoice, null);
+
+        TextView invoiceCustomerName,
+                invoiceCustomerMail,
+                invoiceDate,
+                invoiceProduct,
+                invoiceQuantity,
+                invoiceDiscount,
+                invoiceTotalAmount;
+
+        invoiceDate = invoiceView.findViewById(R.id.invoice_date);
+        invoiceCustomerName = invoiceView.findViewById(R.id.invoice_customer_name);
+        invoiceCustomerMail = invoiceView.findViewById(R.id.invoice_customer_mail);
+        invoiceProduct = invoiceView.findViewById(R.id.invoice_product_name);
+        invoiceQuantity = invoiceView.findViewById(R.id.invoice_noOfBoxes);
+        invoiceDiscount = invoiceView.findViewById(R.id.invoice_discount);
+        invoiceTotalAmount = invoiceView.findViewById(R.id.invoice_amount);
+
+        invoiceCustomerName.setText(customerName.getText().toString());
+        invoiceCustomerMail.setText(customerMail.getText().toString());
+        invoiceProduct.setText(inventorySelected.getProduct_name());
+        invoiceQuantity.setText(noOfBoxes.getText().toString());
+        invoiceDiscount.setText(discount.getText().toString());
+
+        Float discountedValue = inventorySelected.getSp() -
+                (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
+        Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
+        Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
+        Float amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Rs. ");
+        sb.append(amount);
+
+        invoiceTotalAmount.setText(sb.toString());
+
+        invoiceView.setDrawingCacheEnabled(true);
+
+        getSaveImageFilePath(invoiceView);
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+    String getSaveImageFilePath(View view) {
+
+        File mediaStorageDir = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), YOUR_FOLDER_NAME);
+        // Create a storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d(YOUR_FOLDER_NAME, "Failed to create directory");
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageName = "IMG_" + timeStamp + ".jpg";
+
+        String selectedOutputPath = mediaStorageDir.getPath() + File.separator + imageName;
+        Log.d(YOUR_FOLDER_NAME, "selected camera path " + selectedOutputPath);
+
+        view.setDrawingCacheEnabled(true);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+
+        int maxSize = 1080;
+
+        int bWidth = bitmap.getWidth();
+        int bHeight = bitmap.getHeight();
+
+        if (bWidth > bHeight) {
+            int imageHeight = (int) Math.abs(maxSize * ((float)bitmap.getWidth() / (float) bitmap.getHeight()));
+            bitmap = Bitmap.createScaledBitmap(bitmap, maxSize, imageHeight, true);
+        } else {
+            int imageWidth = (int) Math.abs(maxSize * ((float)bitmap.getWidth() / (float) bitmap.getHeight()));
+            bitmap = Bitmap.createScaledBitmap(bitmap, imageWidth, maxSize, true);
+        }
+        view.setDrawingCacheEnabled(false);
+        view.destroyDrawingCache();
+
+        OutputStream fOut = null;
+        try {
+            File file = new File(selectedOutputPath);
+            fOut = new FileOutputStream(file);
+
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return selectedOutputPath;
     }
 }
