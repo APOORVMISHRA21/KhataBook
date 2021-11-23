@@ -8,6 +8,7 @@
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_caraousel1.xml" value="0.15625" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_forward_arrow.xml" value="0.275" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_home.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_path_75.xml" value="0.23148148148148148" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_rectangle_70.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_add_inventory.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_caraousel.xml" value="0.25885416666666666" />
@@ -18,10 +19,13 @@
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_main.xml" value="0.16782006920415224" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_payroll.xml" value="0.2259963768115942" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_splash.xml" value="0.16" />
-        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/banner_app_bar.xml" value="0.1" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_view_asset_liability.xml" value="0.2151268115942029" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/activity_view_invoices.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/banner_app_bar.xml" value="0.4" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/custom_tittle.xml" value="0.2441123188405797" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/edit_inventory.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/payroll_item.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/sample_asset_liability_tab.xml" value="0.2151268115942029" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/sample_caraousel_card_onboarding.xml" value="0.14010416666666667" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/sample_inventory.xml" value="0.5313479623824452" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/layout/sample_invoice.xml" value="0.4" />

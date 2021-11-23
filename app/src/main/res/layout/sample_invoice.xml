@@ -1,164 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/relative_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/invoice_title"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="4dp"
-        android:text="INVOICE"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"/>
+        android:layout_margin="6dp"
+        app:cardBackgroundColor="#f7f3f2"
+        app:cardCornerRadius="8dp"
+        android:elevation="4dp"
+        app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/invoice_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:text="12/02/2021"
-        android:textColor="@color/black"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="20dp"
-        android:paddingRight="4dp"
-        android:layout_below="@id/invoice_title"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/customer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/invoice_date"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Customer Name : "
-        android:textColor="@color/black"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/invoice_customer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/customer_name"
-        android:layout_below="@id/invoice_date"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/invoice_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="12/02/2021"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:paddingRight="4dp" />
+            </RelativeLayout>
 
-    <TextView
-        android:id="@+id/customer_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/customer_name"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Customer Mail ID : "
-        android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/invoice_customer_mail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/customer_mail"
-        android:layout_below="@id/customer_name"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Customer Name : "
+                    android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/customer_mail"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Product Ordered : "
-        android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/invoice_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
 
-    <TextView
-        android:id="@+id/invoice_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/product"
-        android:layout_below="@id/customer_mail"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/noOfBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="No. of Boxes Ordered : "
-        android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/invoice_noOfBoxes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/noOfBox"
-        android:layout_below="@id/product"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
+                <TextView
+                    android:id="@+id/customer_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Customer Mail ID : "
+                    android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/discount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/noOfBox"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Discount Offered : "
-        android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/invoice_customer_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:lines="2"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
 
-    <TextView
-        android:id="@+id/invoice_discount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/discount"
-        android:layout_below="@id/noOfBox"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/total_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/discount"
-        android:layout_margin="12dp"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Total Amount : "
-        android:textColor="@color/black"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/invoice_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:layout_toRightOf="@id/total_amount"
-        android:layout_below="@id/discount"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="normal"/>
-</RelativeLayout>
+                <TextView
+                    android:id="@+id/product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Product Ordered : "
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/invoice_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/noOfBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="No. of Boxes Ordered : "
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/invoice_noOfBoxes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="Discount Offered : "
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/invoice_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="Total Amount : "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/invoice_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>
