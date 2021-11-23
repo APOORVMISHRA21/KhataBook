@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KhataBook">
-        <activity
-            android:name=".ProfitLossActivity"
-            android:exported="false"
+        <activity android:name=".ProfitLossActivity"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ViewAssetLiability"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewInvoices"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InvoiceActivity"
             android:exported="true"

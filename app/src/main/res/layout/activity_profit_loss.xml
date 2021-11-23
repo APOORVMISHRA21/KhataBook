@@ -14,7 +14,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:src="@drawable/ic_home"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="10dp"/>
 
@@ -30,7 +30,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:orientation="horizontal">
@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="246dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="5dp" />
 
     <TextView
@@ -143,9 +143,9 @@
         android:id="@+id/finalOutcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|end"
         android:text="Profit or Loss"
         android:textStyle="bold"
         android:textSize="18sp"

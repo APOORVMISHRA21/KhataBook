@@ -13,32 +13,118 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_rectangle_70" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/action_bar_layer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"
+                    android:text="Khata Book"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"/>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/logout_button"
+                    android:src="@drawable/ic_logout_white_24dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:text="Khata Book"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="15dp"/>
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/logout_button"
-                android:src="@drawable/ic_logout_white_24dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_alignParentRight="true"/>
+                <FrameLayout
+                    android:id="@+id/view_invoice_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/create_new_frame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_path_75"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/bill_history" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:text="View Invoices"/>
+
+                    </LinearLayout>
 
 
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/create_entry_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-20dp">
+
+                    <ImageView
+                        android:id="@+id/edit_design_frame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_path_75"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/dataentry" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:text="Create Entry"/>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </FrameLayout>
 

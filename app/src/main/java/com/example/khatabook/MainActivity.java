@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toolbar;
 
@@ -21,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private Toolbar mToolbar;
-    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll, goToProfitLoss;
+    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll, goToViewInvoices, goToAssetLiability,goToProfitLoss;
     private ImageView logoutButton;
+    private FrameLayout createEntryFrame, viewInvoiceFrame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
         goDataEntry = findViewById(R.id.go_to_data_entry);
         goToInvoice = findViewById(R.id.go_to_invoice);
         goToPayroll = findViewById(R.id.go_to_payroll);
-        goToProfitLoss = findViewById(R.id.go_to_see_profit_loss);
+        goToViewInvoices = findViewById(R.id.go_to_view_invoices);
+        goToAssetLiability = findViewById(R.id.go_to_see_asset_liability);
         logoutButton = findViewById(R.id.logout_button);
-
+        createEntryFrame = findViewById(R.id.create_entry_frame);
+        viewInvoiceFrame = findViewById(R.id.view_invoice_frame);
+        goToProfitLoss = findViewById(R.id.go_to_see_profit_loss);
         goToInventory.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, InventoryDetails.class));
         });
@@ -49,11 +54,21 @@ public class MainActivity extends AppCompatActivity {
         goToPayroll.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, PayrollActivity.class));
         });
+        goToViewInvoices.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, ViewInvoices.class)));
+
+        goToAssetLiability.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ViewAssetLiability.class));
+        });
         goToProfitLoss.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, ProfitLossActivity.class));
         });
-
-
+        createEntryFrame.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, DataEntry.class));
+        });
+        viewInvoiceFrame.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ViewInvoices.class));
+        });
         logoutButton.setOnClickListener(view -> {
             mAuth.signOut();
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
