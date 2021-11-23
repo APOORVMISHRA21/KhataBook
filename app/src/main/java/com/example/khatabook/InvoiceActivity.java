@@ -79,6 +79,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private String totalInvoiceAmount;
     private Float amount;
     private float finalInvoiceAmount;
+    private int selected=0;
 
 
     private int numberOfBoxesInStock;
@@ -180,16 +181,35 @@ public class InvoiceActivity extends AppCompatActivity {
 
         calculateAmountButton.setOnClickListener(view -> {
 
-            Float discountedValue = inventorySelected.getSp() -
-                    (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
-            Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
-            Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
-            amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
-            StringBuilder sb = new StringBuilder();
-            sb.append("Rs. ");
-            sb.append(amount);
-            totalInvoiceAmount = sb.toString();
-            totalAmount.setText(sb.toString());
+            if(discount.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please fill discount value",Toast.LENGTH_SHORT).show();
+
+            }
+            else if(noOfBoxes.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter number of boxes",Toast.LENGTH_SHORT).show();
+            }
+            else if(selected == 0)
+            {
+                Toast.makeText(getApplicationContext(),"Please select product",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Float discountedValue = inventorySelected.getSp() -
+                        (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
+                Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
+                Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
+                amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
+                StringBuilder sb = new StringBuilder();
+                sb.append("Rs. ");
+                sb.append(amount);
+                totalInvoiceAmount = sb.toString();
+                totalAmount.setText(sb.toString());
+            }
+
+
+
+
         });
 
         submitButton.setOnClickListener(view -> {
@@ -198,6 +218,22 @@ public class InvoiceActivity extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(),"Please enter customer mail",Toast.LENGTH_SHORT).show();
 
+            }
+            else if(customerName.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter customer name",Toast.LENGTH_SHORT).show();
+            }
+            else if(discount.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter discount value",Toast.LENGTH_SHORT).show();
+            }
+            else if(noOfBoxes.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter number of boxes",Toast.LENGTH_SHORT).show();
+            }
+            else if(selected == 0)
+            {
+                Toast.makeText(getApplicationContext(),"Please select product",Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -214,7 +250,10 @@ public class InvoiceActivity extends AppCompatActivity {
                             inventorySelected.getProduct_name(),
                             noOfBoxes.getText().toString(),
                             discount.getText().toString(), amount);
+
                 }, 2000);
+                InvoiceActivity.super.finish();
+
             }
 
 
@@ -245,6 +284,7 @@ public class InvoiceActivity extends AppCompatActivity {
                 sb.append(inventorySelected.getQuantity());
                 sb.append(" Boxes Available.");
                 spProvince.setFloatingLabelText(sb.toString());
+                selected =1;
             }
 
             @Override
