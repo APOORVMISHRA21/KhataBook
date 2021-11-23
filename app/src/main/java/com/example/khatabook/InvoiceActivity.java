@@ -1,6 +1,7 @@
 package com.example.khatabook;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -43,8 +45,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,6 +75,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private RelativeLayout progressLoadingView;
     private ImageView goHomeButton;
+    private String totalInvoiceAmount;
 
 
     private int numberOfBoxesInStock;
@@ -128,6 +138,7 @@ public class InvoiceActivity extends AppCompatActivity {
         public void afterTextChanged(Editable editable) { }
     };
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,6 +176,7 @@ public class InvoiceActivity extends AppCompatActivity {
         });
 
         calculateAmountButton.setOnClickListener(view -> {
+
             Float discountedValue = inventorySelected.getSp() -
                     (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
             Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
@@ -173,19 +185,31 @@ public class InvoiceActivity extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             sb.append("Rs. ");
             sb.append(amount);
+            totalInvoiceAmount = sb.toString();
             totalAmount.setText(sb.toString());
         });
 
         submitButton.setOnClickListener(view -> {
-            progressLoadingView.setVisibility(View.VISIBLE);
 
-            new Handler(Looper.getMainLooper()).postDelayed((Runnable) () -> {
+            if(customerMail.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter customer mail",Toast.LENGTH_SHORT).show();
 
-                updateInventory(inventorySelected.getProductId(),
-                        inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
-                //generatePdf();
-                sendEmail();
-            }, 2000);
+            }
+            else
+            {
+                progressLoadingView.setVisibility(View.VISIBLE);
+
+                new Handler(Looper.getMainLooper()).postDelayed((Runnable) () -> {
+
+                    updateInventory(inventorySelected.getProductId(),
+                            inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
+                    //generatePdf();
+                    sendEmail();
+                    addToFirebaseDb(customerName.getText().toString(),customerMail.getText().toString(),inventorySelected.getProduct_name(),noOfBoxes.getText().toString(),discount.getText().toString(),totalInvoiceAmount);
+                }, 2000);
+            }
+
 
 
 
@@ -274,6 +298,7 @@ public class InvoiceActivity extends AppCompatActivity {
         }
     }
 
+
     private void sendEmail(){
         String[] TO = {customerMail.getText().toString()};
         Log.e(TAG, TO.toString());
@@ -331,6 +356,28 @@ public class InvoiceActivity extends AppCompatActivity {
                 inventorySelected.getSp());
 
         myRef.child(productId).setValue(inventory);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void addToFirebaseDb(String name, String mail, String product, String quantity, String discount, String totalAmount)
+    {
+        LocalTime time = LocalTime.now(ZoneId.systemDefault());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+        String formattedTime = dtf.format(time);
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        String formatedDate = df.format(c);
+        Map<String, Object> taskMap = new HashMap<String, Object>();
+        taskMap.put("customerName",name);
+        taskMap.put("customerMail",mail);
+        taskMap.put("invoiceDate",formatedDate);
+        taskMap.put("invoiceProduct",product);
+        taskMap.put("invoiceQuantity",quantity);
+        taskMap.put("invoiceDiscount",discount);
+        taskMap.put("invoiceTotalAmount",totalAmount);
+        FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).updateChildren(taskMap);
+
+
     }
 
     private void generatePdf(){
