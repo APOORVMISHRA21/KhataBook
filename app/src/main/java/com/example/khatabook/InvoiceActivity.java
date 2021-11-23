@@ -67,7 +67,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private final String YOUR_FOLDER_NAME = "Khatabook";
     private ArrayList<String> productNameList;
     private ArrayList<Inventory> productList;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,mbase;
     private TextView totalAmount;
     private TextInputEditText noOfBoxes, discount, customerMail, customerName;
     private TextInputLayout noOfBoxesLayout, discountLayout, customerMailLayout;
@@ -78,6 +78,8 @@ public class InvoiceActivity extends AppCompatActivity {
     private ImageView goHomeButton;
     private String totalInvoiceAmount;
     private Float amount;
+    private float finalInvoiceAmount;
+    private int selected=0;
 
 
     private int numberOfBoxesInStock;
@@ -179,16 +181,35 @@ public class InvoiceActivity extends AppCompatActivity {
 
         calculateAmountButton.setOnClickListener(view -> {
 
-            Float discountedValue = inventorySelected.getSp() -
-                    (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
-            Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
-            Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
-            amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
-            StringBuilder sb = new StringBuilder();
-            sb.append("Rs. ");
-            sb.append(amount);
-            totalInvoiceAmount = sb.toString();
-            totalAmount.setText(sb.toString());
+            if(discount.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please fill discount value",Toast.LENGTH_SHORT).show();
+
+            }
+            else if(noOfBoxes.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter number of boxes",Toast.LENGTH_SHORT).show();
+            }
+            else if(selected == 0)
+            {
+                Toast.makeText(getApplicationContext(),"Please select product",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Float discountedValue = inventorySelected.getSp() -
+                        (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
+                Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
+                Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
+                amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
+                StringBuilder sb = new StringBuilder();
+                sb.append("Rs. ");
+                sb.append(amount);
+                totalInvoiceAmount = sb.toString();
+                totalAmount.setText(sb.toString());
+            }
+
+
+
+
         });
 
         submitButton.setOnClickListener(view -> {
@@ -197,6 +218,22 @@ public class InvoiceActivity extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(),"Please enter customer mail",Toast.LENGTH_SHORT).show();
 
+            }
+            else if(customerName.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter customer name",Toast.LENGTH_SHORT).show();
+            }
+            else if(discount.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter discount value",Toast.LENGTH_SHORT).show();
+            }
+            else if(noOfBoxes.getText().toString().isEmpty())
+            {
+                Toast.makeText(getApplicationContext(),"Please enter number of boxes",Toast.LENGTH_SHORT).show();
+            }
+            else if(selected == 0)
+            {
+                Toast.makeText(getApplicationContext(),"Please select product",Toast.LENGTH_SHORT).show();
             }
             else
             {
@@ -213,7 +250,10 @@ public class InvoiceActivity extends AppCompatActivity {
                             inventorySelected.getProduct_name(),
                             noOfBoxes.getText().toString(),
                             discount.getText().toString(), amount);
+
                 }, 2000);
+                InvoiceActivity.super.finish();
+
             }
 
 
@@ -244,6 +284,7 @@ public class InvoiceActivity extends AppCompatActivity {
                 sb.append(inventorySelected.getQuantity());
                 sb.append(" Boxes Available.");
                 spProvince.setFloatingLabelText(sb.toString());
+                selected =1;
             }
 
             @Override
@@ -381,8 +422,28 @@ public class InvoiceActivity extends AppCompatActivity {
 //        taskMap.put("invoiceQuantity",quantity);
 //        taskMap.put("invoiceDiscount",discount);
 //        taskMap.put("invoiceTotalAmount",totalAmount);
+        mbase = FirebaseDatabase.getInstance().getReference().child("finalInvoiceAmount");
+
         Invoice invoice = new Invoice(name, mail, product, convertStringToInt(quantity),convertStringToInt(discount), new Date().getTime(),totalAmount);
         FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).setValue(invoice);
+        mbase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 finalInvoiceAmount = snapshot.getValue(Integer.class);
+                finalInvoiceAmount =  finalInvoiceAmount + totalAmount;
+                FirebaseDatabase.getInstance().getReference("finalInvoiceAmount").setValue(finalInvoiceAmount);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void generatePdf(){

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:background="#dedede">
+
+    <TextView
+        android:id="@+id/expenditureName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="3dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:text="Human Resource" />
+
+    <TextView
+        android:id="@+id/expenditueValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text="500000"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="3dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/expenditureDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="abc xyz"
+        android:padding="3dp"
+        android:textColor="@color/black"/>
+</LinearLayout>

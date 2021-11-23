@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private Toolbar mToolbar;
-    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll, goToViewInvoices, goToAssetLiability;
+    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll, goToViewInvoices, goToAssetLiability,goToProfitLoss;
     private ImageView logoutButton;
     private FrameLayout createEntryFrame, viewInvoiceFrame;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logout_button);
         createEntryFrame = findViewById(R.id.create_entry_frame);
         viewInvoiceFrame = findViewById(R.id.view_invoice_frame);
-
+        goToProfitLoss = findViewById(R.id.go_to_see_profit_loss);
         goToInventory.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, InventoryDetails.class));
         });
@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
         goToAssetLiability.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, ViewAssetLiability.class));
+        });
+        goToProfitLoss.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ProfitLossActivity.class));
         });
         createEntryFrame.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, DataEntry.class));
