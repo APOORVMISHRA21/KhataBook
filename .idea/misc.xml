@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/circle_shape.xml" value="0.1" />
-        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/circular_progress_bar.xml" value="0.536" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_data_entry.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_inventory_details.xml" value="0.27447916666666666" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_invoice.xml" value="0.1621376811594203" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_login.xml" value="0.26358695652173914" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_payroll.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_profit_loss.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_profitloss.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/custom_tittle.xml" value="0.1" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/edit_inventory.xml" value="0.4" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/item_profit_loss.xml" value="0.4" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/payroll_item.xml" value="0.2" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/profitloss_item.xml" value="0.4" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/sample_inventory.xml" value="0.18070652173913043" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/styles.xml" value="0.17980072463768115" />
+        <entry key="..\:/KhataBook/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_caraousel1.xml" value="0.15625" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_forward_arrow.xml" value="0.275" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_home.xml" value="0.15989583333333332" />
