@@ -9,7 +9,6 @@ import android.os.Bundle;
 import com.opensooq.pluto.PlutoIndicator;
 import com.opensooq.pluto.PlutoView;
 import com.opensooq.pluto.base.PlutoAdapter;
-import com.opensooq.pluto.base.PlutoViewHolder;
 
 import java.util.ArrayList;
 
@@ -29,16 +28,16 @@ public class CaraouselActivity extends AppCompatActivity {
         ArrayList<SampleCaraouselCard> modelList = new ArrayList<>();
 
         modelList.add(new SampleCaraouselCard(R.drawable.ic_caraousel1,
-                "Create your Logo",
-                "Simple and easy way to create unlimited logos"));
+                "Inventory Management",
+                "Simple and easy way to create and update your inventory data."));
 
         modelList.add(new SampleCaraouselCard(R.drawable.ic_caraousel2,
-                "Logo Suggestions for you",
-                "We create logos for you in seconds based on simple steps"));
+                "Invoice Management",
+                "Bill your products without breaking a sweat. Invoices are handled by us."));
 
         modelList.add(new SampleCaraouselCard(R.drawable.ic_caraousel3,
-                " Ultimate Editor",
-                "Edit, Save and Share your beautiful logos to anyone"));
+                "Payroll Management",
+                "Keep forgetting about your employees salaries..? Leave it on us."));
 
         return modelList;
     }
