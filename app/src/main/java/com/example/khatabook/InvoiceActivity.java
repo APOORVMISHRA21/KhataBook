@@ -67,7 +67,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private final String YOUR_FOLDER_NAME = "Khatabook";
     private ArrayList<String> productNameList;
     private ArrayList<Inventory> productList;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,mbase;
     private TextView totalAmount;
     private TextInputEditText noOfBoxes, discount, customerMail, customerName;
     private TextInputLayout noOfBoxesLayout, discountLayout, customerMailLayout;
@@ -78,6 +78,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private ImageView goHomeButton;
     private String totalInvoiceAmount;
     private Float amount;
+    private float finalInvoiceAmount;
 
 
     private int numberOfBoxesInStock;
@@ -381,8 +382,28 @@ public class InvoiceActivity extends AppCompatActivity {
 //        taskMap.put("invoiceQuantity",quantity);
 //        taskMap.put("invoiceDiscount",discount);
 //        taskMap.put("invoiceTotalAmount",totalAmount);
+        mbase = FirebaseDatabase.getInstance().getReference().child("finalInvoiceAmount");
+
         Invoice invoice = new Invoice(name, mail, product, convertStringToInt(quantity),convertStringToInt(discount), new Date().getTime(),totalAmount);
         FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).setValue(invoice);
+        mbase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 finalInvoiceAmount = snapshot.getValue(Integer.class);
+                finalInvoiceAmount =  finalInvoiceAmount + totalAmount;
+                FirebaseDatabase.getInstance().getReference("finalInvoiceAmount").setValue(finalInvoiceAmount);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     private void generatePdf(){

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private Toolbar mToolbar;
-    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll;
+    private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll, goToProfitLoss;
     private ImageView logoutButton;
 
     @Override
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         goDataEntry = findViewById(R.id.go_to_data_entry);
         goToInvoice = findViewById(R.id.go_to_invoice);
         goToPayroll = findViewById(R.id.go_to_payroll);
+        goToProfitLoss = findViewById(R.id.go_to_see_profit_loss);
         logoutButton = findViewById(R.id.logout_button);
 
         goToInventory.setOnClickListener(view -> {
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         goToPayroll.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, PayrollActivity.class));
         });
+        goToProfitLoss.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ProfitLossActivity.class));
+        });
+
 
         logoutButton.setOnClickListener(view -> {
             mAuth.signOut();
