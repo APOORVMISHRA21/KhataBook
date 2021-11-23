@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // validations for input email and password
         if (TextUtils.isEmpty(email)) {
+            progressbar.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(),
                     "Please enter email!!",
                     Toast.LENGTH_LONG)
@@ -72,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(password)) {
+            progressbar.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(),
                     "Please enter password!!",
                     Toast.LENGTH_LONG)

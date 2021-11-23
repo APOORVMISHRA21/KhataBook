@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/KhataBook/app/src/main/res/drawable/ic_app_logo.xml" value="0.290625" />
+        <entry key="..\:/KhataBook/app/src/main/res/drawable/ic_rectangle_70.xml" value="0.290625" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_data_entry.xml" value="0.264" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_inventory_details.xml" value="0.27447916666666666" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_invoice.xml" value="0.1621376811594203" />
@@ -12,6 +14,7 @@
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_profit_loss.xml" value="0.264" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_profitloss.xml" value="0.264" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/activity_splash.xml" value="0.1" />
+        <entry key="..\:/KhataBook/app/src/main/res/layout/banner_app_bar.xml" value="0.27309782608695654" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/custom_tittle.xml" value="0.1" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/edit_inventory.xml" value="0.4" />
         <entry key="..\:/KhataBook/app/src/main/res/layout/fragment_home.xml" value="0.264" />
@@ -22,7 +25,6 @@
         <entry key="..\:/KhataBook/app/src/main/res/layout/styles.xml" value="0.17980072463768115" />
         <entry key="..\:/KhataBook/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_caraousel1.xml" value="0.15625" />
-        <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_caraousel3.xml" value="0.17708333333333334" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_forward_arrow.xml" value="0.275" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_home.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/armaan/AndroidStudioProjects/KhataBook/app/src/main/res/drawable/ic_path_75.xml" value="0.23148148148148148" />
