@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
 
 import Adapters.InventoryAdapter;
 import Models.Inventory;
+import Models.Invoice;
 
 public class InvoiceActivity extends AppCompatActivity {
 
@@ -76,6 +77,7 @@ public class InvoiceActivity extends AppCompatActivity {
     private RelativeLayout progressLoadingView;
     private ImageView goHomeButton;
     private String totalInvoiceAmount;
+    private Float amount;
 
 
     private int numberOfBoxesInStock;
@@ -181,7 +183,7 @@ public class InvoiceActivity extends AppCompatActivity {
                     (convertStringToInt(discount.getText().toString())*inventorySelected.getSp()/100.0f);
             Log.e(TAG, "dISCOUNT : " + convertStringToInt(discount.getText().toString()));
             Log.e(TAG, "dISCOUNTED VALUE : " + discountedValue);
-            Float amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
+            amount = convertStringToInt(noOfBoxes.getText().toString()) * discountedValue;
             StringBuilder sb = new StringBuilder();
             sb.append("Rs. ");
             sb.append(amount);
@@ -206,7 +208,11 @@ public class InvoiceActivity extends AppCompatActivity {
                             inventorySelected.getQuantity() - convertStringToInt(noOfBoxes.getText().toString()));
                     //generatePdf();
                     sendEmail();
-                    addToFirebaseDb(customerName.getText().toString(),customerMail.getText().toString(),inventorySelected.getProduct_name(),noOfBoxes.getText().toString(),discount.getText().toString(),totalInvoiceAmount);
+                    addToFirebaseDb(customerName.getText().toString(),
+                            customerMail.getText().toString(),
+                            inventorySelected.getProduct_name(),
+                            noOfBoxes.getText().toString(),
+                            discount.getText().toString(), amount);
                 }, 2000);
             }
 
@@ -298,7 +304,6 @@ public class InvoiceActivity extends AppCompatActivity {
         }
     }
 
-
     private void sendEmail(){
         String[] TO = {customerMail.getText().toString()};
         Log.e(TAG, TO.toString());
@@ -359,25 +364,25 @@ public class InvoiceActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void addToFirebaseDb(String name, String mail, String product, String quantity, String discount, String totalAmount)
+    private void addToFirebaseDb(String name, String mail, String product, String quantity, String discount, float totalAmount)
     {
+
         LocalTime time = LocalTime.now(ZoneId.systemDefault());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
         String formattedTime = dtf.format(time);
-        Date c = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-        String formatedDate = df.format(c);
-        Map<String, Object> taskMap = new HashMap<String, Object>();
-        taskMap.put("customerName",name);
-        taskMap.put("customerMail",mail);
-        taskMap.put("invoiceDate",formatedDate);
-        taskMap.put("invoiceProduct",product);
-        taskMap.put("invoiceQuantity",quantity);
-        taskMap.put("invoiceDiscount",discount);
-        taskMap.put("invoiceTotalAmount",totalAmount);
-        FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).updateChildren(taskMap);
-
-
+//        Date c = Calendar.getInstance().getTime();
+//        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+//        String formatedDate = df.format(c);
+//        Map<String, Object> taskMap = new HashMap<String, Object>();
+//        taskMap.put("customerName",name);
+//        taskMap.put("customerMail",mail);
+//        taskMap.put("timestamp",new Date().getTime());
+//        taskMap.put("invoiceProduct",product);
+//        taskMap.put("invoiceQuantity",quantity);
+//        taskMap.put("invoiceDiscount",discount);
+//        taskMap.put("invoiceTotalAmount",totalAmount);
+        Invoice invoice = new Invoice(name, mail, product, convertStringToInt(quantity),convertStringToInt(discount), new Date().getTime(),totalAmount);
+        FirebaseDatabase.getInstance().getReference("invoice").child(formattedTime).setValue(invoice);
     }
 
     private void generatePdf(){

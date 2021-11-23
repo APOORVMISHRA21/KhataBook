@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private Toolbar mToolbar;
     private CardView goToInventory,goDataEntry, goToInvoice, goToPayroll;
+    private ImageView logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         goDataEntry = findViewById(R.id.go_to_data_entry);
         goToInvoice = findViewById(R.id.go_to_invoice);
         goToPayroll = findViewById(R.id.go_to_payroll);
+        logoutButton = findViewById(R.id.logout_button);
 
         goToInventory.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, InventoryDetails.class));
@@ -45,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
         goToPayroll.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, PayrollActivity.class));
         });
+
+        logoutButton.setOnClickListener(view -> {
+            mAuth.signOut();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
     }
 
     @Override
